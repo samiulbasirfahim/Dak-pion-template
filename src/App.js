@@ -7,10 +7,17 @@
 */
 
 // import from another file
+import Modals from "./components/modals/Modals"
+import Login from "./pages/Login"
 
 // app component
 const App = () => {
-	return <div></div>
+	return (
+		<div>
+			<Login />
+			<Modals />
+		</div>
+	)
 }
 
 export default App
