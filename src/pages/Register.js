@@ -1,29 +1,16 @@
 /*
     Author: Samiul Basir Fahim
     Title: Chat application
-    Description: This is login component for the Chat application.
+    Description: This is register page for the chat application
     Date: 27 july 2022
-    Filename: login.js
+    Filename: register.js
 */
 
 // import from another files
-import axios from "axios"
 import React from "react"
 import illustration from "../assets/illustration.png"
-import { loginApi } from "../utils/apiRoutes"
 
-// login component
-const Login = () => {
-	const handleLogin = async (e) => {
-		e.preventDefault()
-		const loginInfo = {}
-		loginInfo.username = e.target.username.value
-		loginInfo.password = e.target.password.value
-		console.log(loginInfo)
-		const res = await axios.post(loginApi, loginInfo)
-		console.log(res.data)
-	}
-
+const Register = () => {
 	return (
 		<div className="w-screen h-screen absolute top-0 left-0 flex justify-center items-center">
 			<div className="bg-primary 2xl:w-[60vw] xl:w-[70vw] min-h-[70vh] lg:w-[80vw] md:w-[50vw] w-[300px] rounded-xl flex justify-center ">
@@ -36,10 +23,7 @@ const Login = () => {
 					<h1 className="text-4xl text-secondary font-bold font-edu">
 						Dak Pion
 					</h1>
-					<form
-						className="flex flex-col mt-16"
-						onSubmit={handleLogin}
-					>
+					<form className="flex flex-col mt-16">
 						<input
 							type="text"
 							name="username"
@@ -77,4 +61,4 @@ const Login = () => {
 	)
 }
 
-export default Login
+export default Register

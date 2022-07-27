@@ -7,22 +7,15 @@
 */
 
 // import from another file
-import background from "./assets/background.jpg"
-import Login from "./pages/Login"
+import BackgroundImages from "./utils/BackgroundImages"
+import ManageRoutes from "./utils/Routes"
 
 // app component
 const App = () => {
 	return (
 		<div className="">
-			<div>
-				<img
-					src={background}
-					className="absolute left-0 top-0 w-screen h-screen -z-50"
-					alt=""
-				/>
-				<div className="absolute left-0 top-0 w-screen h-screen bg-black/70 -z-40" />
-			</div>
-			<Login />
+			<BackgroundImages />
+			<ManageRoutes />
 		</div>
 	)
 }
