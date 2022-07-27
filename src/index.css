@@ -2,3 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+/* import font family */
+@import url("https://fonts.googleapis.com/css2?family=Edu+VIC+WA+NT+Beginner:wght@500&display=swap");
+
+/* custom tailwind class */
+.font-edu {
+	font-family: "Edu VIC WA NT Beginner", cursive;
+}

@@ -8,7 +8,7 @@
 
 // import from another file
 import background from "./assets/background.jpg"
-import Register from "./pages/Register"
+import Login from "./pages/Login"
 
 // app component
 const App = () => {
@@ -22,7 +22,7 @@ const App = () => {
 				/>
 				<div className="absolute left-0 top-0 w-screen h-screen bg-black/70 -z-40" />
 			</div>
-			<Register />
+			<Login />
 		</div>
 	)
 }
