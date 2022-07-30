@@ -9,7 +9,7 @@
 // import from another files
 import axios from "axios"
 import React from "react"
-import { Link } from "react-router-dom"
+import { Link, Navigate, useNavigate } from "react-router-dom"
 import illustration from "../assets/illustration.png"
 import Loading from "../components/Loading"
 import { registerApi } from "../utils/apiRoutes"
@@ -29,6 +29,7 @@ const Register = () => {
 		confirmPassword: "",
 	})
 	const [isLoading, setIsLoading] = React.useState(false)
+	const navigate = useNavigate()
 	React.useEffect(() => {
 		const userNameArray = registerInfo.username.split("")
 		if (userNameArray.includes(" ")) {
@@ -96,6 +97,10 @@ const Register = () => {
 				})
 			default:
 				break
+		}
+		if (res.data.status === true) {
+			localStorage.setItem("auth_token", res.data.token)
+			navigate("/")
 		}
 	}
 	return (
