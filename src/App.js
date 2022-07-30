@@ -15,7 +15,7 @@ import ManageRoutes from "./utils/Routes"
 const App = () => {
 	const auth = useAuthState()
 	return (
-		<div className="">
+		<div className="overflow-x-hidden">
 			<BackgroundImages />
 			<ManageRoutes />
 		</div>
