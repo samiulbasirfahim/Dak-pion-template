@@ -11,3 +11,4 @@ const baseUrl = "http://localhost:4000/"
 
 exports.loginApi = baseUrl + "user/login"
 exports.registerApi = baseUrl + "user/register"
+exports.verifyLogin = baseUrl + "user/verifyLogin"

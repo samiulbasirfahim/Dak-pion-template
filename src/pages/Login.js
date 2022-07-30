@@ -9,12 +9,17 @@
 // import from another files
 import axios from "axios"
 import React from "react"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import illustration from "../assets/illustration.png"
 import { loginApi } from "../utils/apiRoutes"
 
 // login component
 const Login = () => {
+	const [error, setError] = React.useState({
+		username: "",
+		password: "",
+	})
+	const navigate = useNavigate()
 	const handleLogin = async (e) => {
 		e.preventDefault()
 		const loginInfo = {}
@@ -22,6 +27,22 @@ const Login = () => {
 		loginInfo.password = e.target.password.value
 		const res = await axios.post(loginApi, loginInfo)
 		console.log(res.data)
+		if (res.data.status === false) {
+			switch (res.data.errorOn) {
+				case "username":
+					setError({ ...error, username: res.data.message })
+					break
+				case "password":
+					setError({ ...error, password: res.data.message })
+					break
+				default:
+					break
+			}
+		}
+		if (res.data.status === true) {
+			localStorage.setItem("user", JSON.stringify(res.data.user))
+			navigate("/")
+		}
 	}
 
 	return (
@@ -47,6 +68,9 @@ const Login = () => {
 							className="bg-neutral rounded mt-3 py-2 border-2 border-secondary text-white pl-2 w-[260px] placeholder:font-edu placeholder:text-gray-500"
 							placeholder="Username here ..."
 						/>
+						<h5 className="text-red-500 font-edu text-md py-1">
+							{error.username}
+						</h5>
 						<input
 							type="password"
 							name="password"
@@ -54,6 +78,9 @@ const Login = () => {
 							className="bg-neutral rounded mt-3 py-2 border-2 border-secondary text-white pl-2 w-[260px] placeholder:font-edu placeholder:text-gray-500"
 							placeholder="Password here ..."
 						/>
+						<h5 className="text-red-500 font-edu text-md py-1">
+							{error.password}
+						</h5>
 						<input
 							type="submit"
 							value="Login"

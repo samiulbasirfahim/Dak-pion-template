@@ -7,11 +7,13 @@
 */
 
 // import from another file
+import useAuthState from "./hooks/useAuthState"
 import BackgroundImages from "./utils/BackgroundImages"
 import ManageRoutes from "./utils/Routes"
 
 // app component
 const App = () => {
+	const auth = useAuthState()
 	return (
 		<div className="">
 			<BackgroundImages />
