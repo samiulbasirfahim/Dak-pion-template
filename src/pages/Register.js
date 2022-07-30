@@ -21,6 +21,7 @@ const Register = () => {
 		password: "",
 		confirmPassword: "",
 	})
+	const [anyError, setAnyError] = React.useState(false)
 	const [registerInfo, setRegisterInfo] = React.useState({
 		username: "",
 		email: "",
@@ -31,21 +32,25 @@ const Register = () => {
 	React.useEffect(() => {
 		const userNameArray = registerInfo.username.split("")
 		if (userNameArray.includes(" ")) {
+			setAnyError(true)
 			return setError({
 				...error,
 				username: "You cant use whitespace in username",
 			})
 		} else {
+			setAnyError(false)
 			return setError({ ...error, username: "" })
 		}
 	}, [registerInfo.username])
 	React.useEffect(() => {
 		if (registerInfo.password.length < 8) {
+			setAnyError(true)
 			return setError({
 				...error,
 				password: "You must have at least 8 characters",
 			})
 		} else {
+			setAnyError(false)
 			return setError({
 				...error,
 				password: "",
@@ -54,8 +59,10 @@ const Register = () => {
 	}, [registerInfo.password])
 	React.useEffect(() => {
 		if (registerInfo.password !== registerInfo.confirmPassword) {
+			setAnyError(true)
 			setError({ ...error, confirmPassword: "Confirm Password mismatch" })
 		} else {
+			setAnyError(false)
 			setError({ ...error, confirmPassword: "" })
 		}
 	}, [registerInfo.confirmPassword])
@@ -73,6 +80,7 @@ const Register = () => {
 		e.preventDefault()
 		setIsLoading(true)
 		const res = await axios.post(registerApi, registerInfo)
+		console.log(res)
 		setIsLoading(false)
 		switch (res.data.errorOn) {
 			case "username":
@@ -156,9 +164,12 @@ const Register = () => {
 						<input
 							type="submit"
 							value="Register"
-							className="bg-secondary mt-3 py-2 rounded-tl-3xl rounded-br-3xl"
+							disabled={anyError}
+							className=" bg-secondary mt-3 py-2 rounded-tl-3xl rounded-br-3xl"
 						/>
-
+						<h5 className="text-red-500 font-edu text-md py-1">
+							{anyError && "Please fill form carefully"}
+						</h5>
 						<Link
 							to={"/login"}
 							className="text-blue-700 font-edu font-bold text-lg mt-3 underline"
